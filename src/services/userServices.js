@@ -24,4 +24,8 @@ const update = async (userId, properties) => {
   return userToUpdate;
 };
 
-export default { create, findAll, findOne, update };
+const deleteUser = async (userId) => {
+  return await User.remove({ userId: userId });
+};
+
+export default { create, findAll, findOne, update, deleteUser };

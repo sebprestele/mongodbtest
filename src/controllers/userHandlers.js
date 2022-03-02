@@ -38,3 +38,12 @@ export const updateUser = async (req, res) => {
     console.log(error);
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const userToDelete = await userServices.deleteUser(req.params.id);
+    res.json(userToDelete);
+  } catch (error) {
+    console.log(error);
+  }
+};
