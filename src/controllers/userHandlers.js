@@ -5,14 +5,13 @@ import { v4 as uuidv4 } from "uuid";
 export const createUser = async (req, res) => {
   try {
     console.log(req.body);
-    const { firstName, lastName, email, password } = req.body;
-    const userId = uuidv4();
+    const { firstName, lastName, email, password, profileImage } = req.body;
     const user = new User({
-      userId,
       firstName,
       lastName,
       email,
       password,
+      profileImage,
     });
     await userServices.create(user);
     res.json(user);
@@ -43,6 +42,17 @@ export const deleteUser = async (req, res) => {
   try {
     const userToDelete = await userServices.deleteUser(req.params.id);
     res.json(userToDelete);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addMoviesToUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const movieId = req.params.movieId;
+    const updatedUser = await userServices.addMoviesToUser(userId, movieId);
+    res.json(updatedUser);
   } catch (error) {
     console.log(error);
   }

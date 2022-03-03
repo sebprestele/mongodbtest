@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { uuid } from "uuidv4";
 
 const userSchema = new mongoose.Schema({
   userId: String,
@@ -7,5 +6,12 @@ const userSchema = new mongoose.Schema({
   lastName: String,
   email: { type: String, unique: true },
   password: String,
+  profileImage: String,
+  movies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Movie",
+    },
+  ],
 });
 export default mongoose.model("User", userSchema);

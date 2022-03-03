@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import { uuid } from "uuidv4";
 import movieRouter from "./src/routes/movies.js";
 import userRouter from "./src/routes/userRouter.js";
 

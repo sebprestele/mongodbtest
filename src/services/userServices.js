@@ -5,11 +5,11 @@ const create = async (user) => {
 };
 
 const findAll = async () => {
-  return User.find();
+  return User.find().populate("movies");
 };
 
 const findOne = async (userId) => {
-  return User.findOne({ userId: userId });
+  return User.findById(userId);
 };
 
 const update = async (userId, properties) => {
@@ -20,7 +20,6 @@ const update = async (userId, properties) => {
   userToUpdate.lastName = lastName ? lastName : userToUpdate.lastName;
   userToUpdate.email = email ? email : userToUpdate.email;
   userToUpdate.password = password ? password : userToUpdate.password;
-
   return userToUpdate;
 };
 
@@ -28,4 +27,17 @@ const deleteUser = async (userId) => {
   return await User.remove({ userId: userId });
 };
 
-export default { create, findAll, findOne, update, deleteUser };
+const addMoviesToUser = async (userId, movieId) => {
+  const user = await User.findById(userId);
+  user.movies.push(movieId);
+  return user.save();
+};
+
+export default {
+  create,
+  findAll,
+  findOne,
+  update,
+  deleteUser,
+  addMoviesToUser,
+};
